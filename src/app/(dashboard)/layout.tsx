@@ -17,7 +17,7 @@ export default function DashboardLayout({
       <div className="min-h-screen bg-canvas">
         <Sidebar isOpen={sidebarOpen} onClose={() => setSidebarOpen(false)} />
         
-        <div className="flex flex-col lg:ml-64">
+        <div className="flex flex-col lg:ml-[84px]">
           <Header onMenuClick={() => setSidebarOpen(true)} />
           
           <main className="mt-16 min-h-[calc(100vh-64px)] p-4 lg:p-8">

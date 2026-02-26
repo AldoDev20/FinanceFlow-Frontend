@@ -39,25 +39,21 @@ export function Sidebar({ isOpen, onClose }: { isOpen: boolean; onClose: () => v
       ) : null}
 
       <aside className={cn(
-        "fixed left-0 top-0 z-50 h-full w-64 border-r border-border-subtle bg-canvas px-4 py-8 transition-transform duration-300 ease-in-out lg:translate-x-0",
+        "fixed left-0 top-0 z-50 h-full w-[84px] border-r border-border-subtle bg-canvas py-8 transition-transform duration-300 ease-in-out lg:translate-x-0 flex flex-col items-center",
         isOpen ? "translate-x-0" : "-translate-x-full"
       )}>
-        <div className="flex h-full flex-col">
-          <div className="mb-10 flex items-center justify-between px-2">
-            <Link href="/dashboard" className="flex items-center gap-3 group/logo">
-              <div className="flex h-10 w-10 items-center justify-center rounded-2xl bg-ink-primary text-canvas shadow-lg shadow-ink-primary/10 transition-transform duration-300 group-hover/logo:scale-105">
+        <div className="flex h-full flex-col w-full items-center">
+          {/* Logo Section */}
+          <div className="mb-10 flex items-center justify-center">
+            <Link href="/dashboard" className="group/logo relative">
+              <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-2xl bg-ink-primary text-canvas shadow-lg shadow-ink-primary/10 transition-transform duration-300 group-hover/logo:scale-105">
                 <span className="font-display text-xl font-bold italic">F</span>
               </div>
-              <span className="font-display text-2xl font-semibold tracking-tight text-ink-primary">
-                Finance<span className="text-growth font-bold italic">Flow</span>
-              </span>
             </Link>
-            <button onClick={onClose} className="lg:hidden text-ink-muted">
-              <X size={20} />
-            </button>
           </div>
 
-          <nav className="flex-1 space-y-1">
+          {/* Navigation Section */}
+          <nav className="flex-1 space-y-4 w-full px-2">
             {navigation.map((item) => {
               const isActive = pathname.startsWith(item.href)
               return (
@@ -65,58 +61,53 @@ export function Sidebar({ isOpen, onClose }: { isOpen: boolean; onClose: () => v
                   key={item.name}
                   href={item.href}
                   className={cn(
-                    "group relative flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium transition-colors duration-200",
+                    "group relative flex flex-col items-center justify-center gap-1.5 rounded-xl py-3 transition-all duration-200",
                     isActive 
-                      ? "text-ink-primary font-semibold" 
-                      : "text-ink-secondary hover:text-ink-primary"
+                      ? "text-growth bg-growth/5" 
+                      : "text-ink-secondary hover:text-ink-primary hover:bg-surface-2"
                   )}
                 >
-                  {isActive ? (
-                    <motion.div
-                      layoutId="activeNav"
-                      className="absolute inset-0 bg-growth/10 rounded-xl -z-10"
-                      initial={false}
-                      transition={{ type: "spring", bounce: 0.15, duration: 0.6 }}
-                    >
+                  <div className="relative">
+                    <item.icon className={cn(
+                      "h-6 w-6 transition-all duration-300",
+                      isActive ? "scale-110" : "group-hover:scale-110"
+                    )} />
+                    {isActive ? (
                       <motion.div 
-                        className="absolute left-0 top-2 bottom-2 w-[3px] bg-growth rounded-full"
-                        layoutId="activeStroke"
+                        layoutId="activeSideIndicator"
+                        className="absolute -left-3 top-1/2 -translate-y-1/2 w-1 h-4 bg-growth rounded-full" 
+                        transition={{ type: "spring", bounce: 0.2, duration: 0.6 }}
                       />
-                    </motion.div>
-                  ) : null}
-                  <item.icon className={cn(
-                    "h-5 w-5 transition-all duration-300 z-10",
-                    isActive ? "text-growth scale-110" : "text-ink-muted group-hover:text-ink-primary group-hover:scale-105"
-                  )} />
+                    ) : null}
+                  </div>
+                  
+                  {/* Name shown on hover or when active (compact) */}
                   <span className={cn(
-                    "z-10 transition-colors duration-200",
-                    isActive ? "font-semibold" : "group-hover:text-ink-primary"
+                    "text-[10px] font-medium transition-all duration-300 text-center px-1 leading-tight",
+                    isActive ? "opacity-100" : "opacity-0 group-hover:opacity-100 translate-y-1 group-hover:translate-y-0"
                   )}>
                     {item.name}
                   </span>
-                  {isActive ? (
-                    <motion.div 
-                      layoutId="activeDot"
-                      className="ml-auto h-1 w-1 rounded-full bg-growth z-10" 
-                      transition={{ type: "spring", bounce: 0.2, duration: 0.6 }}
-                    />
-                  ) : null}
                 </Link>
               )
             })}
           </nav>
 
-          <Link href="/settings" className="mt-auto border-t border-border-subtle pt-6 px-3 hover:bg-surface-2/50 transition-colors rounded-xl mb-2">
-            <div className="flex items-center gap-3">
-              <div className="h-9 w-9 rounded-full bg-surface-3 flex items-center justify-center text-xs font-semibold text-ink-secondary italic shadow-inner">
-                {user?.name?.charAt(0) || 'U'}
+          {/* Profile Section */}
+          <div className="mt-auto pt-6 px-2 w-full border-t border-border-subtle">
+            <Link href="/settings" className="group/profile flex flex-col items-center justify-center gap-1.5 py-3 hover:bg-surface-2 rounded-xl transition-all">
+              <div className="h-10 w-10 shrink-0 rounded-full bg-surface-3 flex items-center justify-center text-sm font-semibold text-ink-secondary italic shadow-inner ring-2 ring-transparent group-hover/profile:ring-border-subtle transition-all overflow-hidden">
+                {user?.avatarUrl ? (
+                  <img src={user.avatarUrl} alt={user.name} className="h-full w-full object-cover" />
+                ) : (
+                  user?.name?.charAt(0) || 'U'
+                )}
               </div>
-              <div className="flex flex-col">
-                <span className="text-sm font-medium text-ink-primary truncate max-w-[140px]">{user?.name || 'Usuario'}</span>
-                <span className="text-[10px] text-growth font-bold uppercase tracking-wider">Plan Premium</span>
-              </div>
-            </div>
-          </Link>
+              <span className="text-[10px] font-medium text-ink-primary opacity-0 group-hover/profile:opacity-100 transition-all text-center truncate w-full px-1">
+                {user?.name?.split(' ')[0] || 'Perfil'}
+              </span>
+            </Link>
+          </div>
         </div>
       </aside>
     </>

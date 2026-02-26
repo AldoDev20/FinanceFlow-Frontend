@@ -44,7 +44,7 @@ export function Header({ onMenuClick }: { onMenuClick: () => void }) {
   }
 
   return (
-    <header className="fixed top-0 right-0 left-0 z-30 flex h-16 items-center border-b border-border-subtle bg-canvas/80 backdrop-blur-md px-4 lg:left-64 lg:px-8">
+    <header className="fixed top-0 right-0 left-0 z-30 flex h-16 items-center border-b border-border-subtle bg-canvas/80 backdrop-blur-md px-4 lg:left-[84px] lg:px-8">
       <div className="flex w-full items-center justify-between">
         <div className="flex items-center gap-4">
           <Button 
