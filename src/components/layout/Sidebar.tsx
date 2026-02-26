@@ -106,7 +106,7 @@ export function Sidebar({ isOpen, onClose }: { isOpen: boolean; onClose: () => v
             })}
           </nav>
 
-          <Link href="/settings" className="mt-auto border-t border-border-subtle pt-6 px-2 hover:bg-surface-2/50 transition-colors rounded-xl mx-2 mb-2">
+          <Link href="/settings" className="mt-auto border-t border-border-subtle pt-6 px-3 hover:bg-surface-2/50 transition-colors rounded-xl mb-2">
             <div className="flex items-center gap-3">
               <div className="h-9 w-9 rounded-full bg-surface-3 flex items-center justify-center text-xs font-semibold text-ink-secondary italic shadow-inner">
                 {user?.name?.charAt(0) || 'U'}
