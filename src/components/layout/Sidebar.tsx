@@ -39,8 +39,8 @@ export function Sidebar({ isOpen, onClose }: { isOpen: boolean; onClose: () => v
       ) : null}
 
       <aside className={cn(
-        "fixed left-0 top-0 z-50 h-full w-[84px] border-r border-border-subtle bg-canvas py-8 transition-transform duration-300 ease-in-out lg:translate-x-0 flex flex-col items-center",
-        isOpen ? "translate-x-0" : "-translate-x-full"
+        "fixed left-0 top-0 z-50 h-full w-[280px] lg:w-[84px] border-r border-border-subtle bg-canvas py-8 transition-all duration-500 cubic-bezier(0.22, 1, 0.36, 1) lg:translate-x-0 flex flex-col items-center",
+        isOpen ? "translate-x-0 shadow-2xl shadow-black/20" : "-translate-x-full"
       )}>
         <div className="flex h-full flex-col w-full items-center">
           {/* Logo Section */}
@@ -60,14 +60,17 @@ export function Sidebar({ isOpen, onClose }: { isOpen: boolean; onClose: () => v
                 <Link
                   key={item.name}
                   href={item.href}
+                  onClick={() => {
+                    if (window.innerWidth < 1024) onClose();
+                  }}
                   className={cn(
-                    "group relative flex flex-col items-center justify-center gap-1.5 rounded-xl py-3 transition-all duration-200",
+                    "group relative flex items-center lg:flex-col lg:justify-center gap-4 lg:gap-1.5 rounded-xl px-4 lg:px-0 py-3.5 lg:py-3 transition-all duration-300",
                     isActive 
-                      ? "text-growth bg-growth/5" 
+                      ? "text-growth bg-growth/8" 
                       : "text-ink-secondary hover:text-ink-primary hover:bg-surface-2"
                   )}
                 >
-                  <div className="relative">
+                  <div className="relative shrink-0">
                     <item.icon className={cn(
                       "h-6 w-6 transition-all duration-300",
                       isActive ? "scale-110" : "group-hover:scale-110"
@@ -75,16 +78,18 @@ export function Sidebar({ isOpen, onClose }: { isOpen: boolean; onClose: () => v
                     {isActive ? (
                       <motion.div 
                         layoutId="activeSideIndicator"
-                        className="absolute -left-3 top-1/2 -translate-y-1/2 w-1 h-4 bg-growth rounded-full" 
+                        className="absolute -left-6 lg:-left-3 top-1/2 -translate-y-1/2 w-1.5 h-6 lg:h-4 bg-growth rounded-full shadow-[0_0_8px_rgba(58,138,112,0.4)]" 
                         transition={{ type: "spring", bounce: 0.2, duration: 0.6 }}
                       />
                     ) : null}
                   </div>
                   
-                  {/* Name shown on hover or when active (compact) */}
+                  {/* Name: visible on mobile, hover/active on desktop */}
                   <span className={cn(
-                    "text-[10px] font-medium transition-all duration-300 text-center px-1 leading-tight",
-                    isActive ? "opacity-100" : "opacity-0 group-hover:opacity-100 translate-y-1 group-hover:translate-y-0"
+                    "text-sm lg:text-[10px] font-medium transition-all duration-300",
+                    isActive 
+                      ? "opacity-100 translate-x-0" 
+                      : "opacity-100 lg:opacity-0 lg:group-hover:opacity-100 lg:translate-y-1 lg:group-hover:translate-y-0"
                   )}>
                     {item.name}
                   </span>
@@ -95,7 +100,13 @@ export function Sidebar({ isOpen, onClose }: { isOpen: boolean; onClose: () => v
 
           {/* Profile Section */}
           <div className="mt-auto pt-6 px-2 w-full border-t border-border-subtle">
-            <Link href="/settings" className="group/profile flex flex-col items-center justify-center gap-1.5 py-3 hover:bg-surface-2 rounded-xl transition-all">
+            <Link 
+              href="/settings" 
+              onClick={() => {
+                if (window.innerWidth < 1024) onClose();
+              }}
+              className="group/profile flex items-center lg:flex-col lg:justify-center gap-4 lg:gap-1.5 p-4 lg:py-3 hover:bg-surface-2 rounded-xl transition-all"
+            >
               <div className="h-10 w-10 shrink-0 rounded-full bg-surface-3 flex items-center justify-center text-sm font-semibold text-ink-secondary italic shadow-inner ring-2 ring-transparent group-hover/profile:ring-border-subtle transition-all overflow-hidden">
                 {user?.avatarUrl ? (
                   <img src={user.avatarUrl} alt={user.name} className="h-full w-full object-cover" />
@@ -103,9 +114,14 @@ export function Sidebar({ isOpen, onClose }: { isOpen: boolean; onClose: () => v
                   user?.name?.charAt(0) || 'U'
                 )}
               </div>
-              <span className="text-[10px] font-medium text-ink-primary opacity-0 group-hover/profile:opacity-100 transition-all text-center truncate w-full px-1">
-                {user?.name?.split(' ')[0] || 'Perfil'}
-              </span>
+              <div className="flex flex-col lg:items-center">
+                <span className="text-sm lg:text-[10px] font-bold text-ink-primary">
+                  {user?.name || 'Usuario'}
+                </span>
+                <span className="text-xs lg:hidden text-ink-muted">
+                  Ver perfil
+                </span>
+              </div>
             </Link>
           </div>
         </div>

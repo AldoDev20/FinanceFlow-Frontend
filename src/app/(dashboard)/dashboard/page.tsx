@@ -120,8 +120,8 @@ export default function DashboardPage() {
     >
       <div className="relative">
         <div className="absolute -left-20 -top-20 w-64 h-64 bg-growth/5 blur-[120px] rounded-full pointer-events-none" />
-        <h1 className="text-4xl font-display font-medium tracking-tight text-ink-primary">Dashboard</h1>
-        <p className="text-ink-secondary mt-2 max-w-prose leading-relaxed">Bienvenido de nuevo, aquí está tu resumen financiero.</p>
+        <h1 className="text-[var(--text-4xl)] font-display font-medium tracking-tight text-ink-primary">Dashboard</h1>
+        <p className="text-[var(--text-base)] text-ink-secondary mt-2 max-w-prose leading-relaxed">Bienvenido de nuevo, aquí está tu resumen financiero.</p>
       </div>
 
       <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
@@ -180,16 +180,16 @@ export default function DashboardPage() {
         ))}
       </div>
 
-      <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-7">
+      <div className="grid gap-6 grid-cols-1 lg:grid-cols-7">
         <motion.div
-          className="col-span-4"
+          className="lg:col-span-4"
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.4, duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
         >
           <Card className="card-layer h-full border-none">
-            <CardHeader className="flex flex-row items-center justify-between pt-6 px-6">
-              <CardTitle className="text-xs uppercase tracking-[0.25em] font-bold text-ink-muted leading-none">Evolución Financiera</CardTitle>
+            <CardHeader className="flex flex-col sm:flex-row items-center justify-between gap-4 pt-6 px-6">
+              <CardTitle className="text-[var(--text-xs)] uppercase tracking-[0.25em] font-bold text-ink-muted leading-none text-center sm:text-left">Evolución Financiera</CardTitle>
               <div className="flex items-center gap-4 text-[10px] uppercase font-bold tracking-widest">
                 <div className="flex items-center gap-1.5"><span className="w-2 h-2 rounded-full bg-growth" /> Ingresos</div>
                 <div className="flex items-center gap-1.5"><span className="w-2 h-2 rounded-full bg-expense" /> Gastos</div>
@@ -202,14 +202,14 @@ export default function DashboardPage() {
         </motion.div>
 
         <motion.div
-          className="col-span-3"
+          className="lg:col-span-3"
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.5, duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
         >
           <Card className="card-layer h-full border-none">
             <CardHeader className="pt-6 px-6">
-              <CardTitle className="text-xs uppercase tracking-[0.25em] font-bold text-ink-muted">Gastos por Categoría</CardTitle>
+              <CardTitle className="text-[var(--text-xs)] uppercase tracking-[0.25em] font-bold text-ink-muted text-center lg:text-left">Gastos por Categoría</CardTitle>
             </CardHeader>
             <CardContent className="p-6">
               <CategoryPieChart data={pieData} />
