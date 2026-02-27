@@ -190,6 +190,7 @@ export function TransactionForm() {
                       placeholder="0.00"
                       className="pl-7 bg-surface-2 border-border-subtle rounded-xl h-11"
                       {...field}
+                      value={field.value === 0 ? '' : field.value}
                       onChange={(e) => {
                         const val = e.target.value;
                         field.onChange(val === "" ? 0 : parseFloat(val));

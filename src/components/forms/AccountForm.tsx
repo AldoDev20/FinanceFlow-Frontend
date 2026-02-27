@@ -121,16 +121,19 @@ export function AccountForm() {
             <FormItem className="space-y-2">
               <FormLabel className="text-sm font-semibold tracking-wide text-ink-secondary">Saldo Inicial</FormLabel>
               <FormControl>
-                <Input 
-                  type="number" 
-                  inputMode="decimal"
-                  step="any" 
-                  {...field} 
-                  onChange={(e) => {
-                    const val = e.target.value;
-                    field.onChange(val === "" ? 0 : parseFloat(val));
-                  }}
-                />
+                    <Input 
+                      type="number" 
+                      inputMode="decimal"
+                      step="any" 
+                      placeholder="0.00"
+                      className="pl-7 bg-surface-2 border-border-subtle rounded-xl h-11"
+                      {...field}
+                      value={field.value === 0 ? '' : field.value}
+                      onChange={(e) => {
+                        const val = e.target.value;
+                        field.onChange(val === "" ? 0 : parseFloat(val));
+                      }}
+                    />
               </FormControl>
               <FormMessage />
             </FormItem>

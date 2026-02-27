@@ -5,6 +5,7 @@ import { Plus, Target, Trophy, Loader2 } from 'lucide-react'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
 import { Progress } from '@/components/ui/progress'
+import Link from 'next/link'
 import { useGoals, useUpdateGoal } from '@/hooks/useGoals'
 
 export default function GoalsPage() {
@@ -39,14 +40,16 @@ export default function GoalsPage() {
       className="space-y-8"
     >
       <div className="flex items-center justify-between">
-        <div>
+        <div className="space-y-1">
           <h1 className="text-3xl font-bold tracking-tight text-ink-primary">Metas de Ahorro</h1>
-          <p className="text-ink-secondary mt-1">Visualiza y alcanza tus objetivos financieros.</p>
+          <p className="text-ink-secondary">Visualiza y alcanza tus objetivos financieros.</p>
         </div>
-        <Button className="bg-growth hover:bg-growth/90 text-white gap-2">
-          <Plus size={18} />
-          Nueva Meta
-        </Button>
+        <Link href="/goals/new">
+          <Button className="bg-growth hover:bg-growth/90 text-white gap-2 rounded-xl shadow-lg shadow-growth/10 transition-all font-bold h-11">
+            <Plus size={18} />
+            Nueva Meta
+          </Button>
+        </Link>
       </div>
 
       <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
@@ -125,9 +128,11 @@ export default function GoalsPage() {
               <h3 className="text-lg font-semibold text-ink-primary">Sin metas establecidas</h3>
               <p className="text-ink-muted max-w-xs mx-auto">Define tu primer objetivo de ahorro para empezar a construir tu futuro.</p>
             </div>
-            <Button className="bg-growth hover:bg-growth/90 text-white">
-              Crear mi primera meta
-            </Button>
+            <Link href="/goals/new">
+              <Button className="bg-growth hover:bg-growth/90 text-white rounded-xl shadow-lg shadow-growth/10 transition-all font-bold h-11">
+                Crear mi primera meta
+              </Button>
+            </Link>
           </div>
         )}
       </div>
