@@ -59,7 +59,6 @@ function TransactionsContent() {
             variant="outline" 
             onClick={() => downloadPDF(filters)} 
             disabled={isDownloadingPDF}
-            className="border-border-subtle hover:bg-surface-2 rounded-xl h-11"
           >
             {isDownloadingPDF ? <Loader2 className="h-4 w-4 animate-spin" /> : <FileText className="mr-2 h-4 w-4" />}
             PDF
@@ -68,13 +67,12 @@ function TransactionsContent() {
             variant="outline" 
             onClick={() => downloadExcel(filters)} 
             disabled={isDownloadingExcel}
-            className="border-border-subtle hover:bg-surface-2 rounded-xl h-11"
           >
             {isDownloadingExcel ? <Loader2 className="h-4 w-4 animate-spin" /> : <FileDown className="mr-2 h-4 w-4" />}
             Excel
           </Button>
           <Link href="/transactions/new">
-            <Button className="bg-growth hover:bg-growth/90 text-white rounded-xl shadow-md shadow-growth/10 h-11 px-6">
+            <Button variant="growth" className="px-6">
               <Plus className="mr-2 h-4 w-4" />
               Nueva Transacción
             </Button>
@@ -82,7 +80,7 @@ function TransactionsContent() {
         </div>
       </div>
 
-      <div className="card-layer p-6 border-none rounded-2xl shadow-sm">
+      <div className="glass-card p-6 md:p-8 space-y-8 animate-in fade-in slide-in-from-bottom-4 duration-700 ease-out">
         <TransactionFilters 
           search={search}
           onSearchChange={setSearch}

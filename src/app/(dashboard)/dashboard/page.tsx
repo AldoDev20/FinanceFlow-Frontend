@@ -128,30 +128,39 @@ export default function DashboardPage() {
         {metrics.map((item, index) => (
           <motion.div
             key={item.title}
-            initial={{ opacity: 0, scale: 0.95 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ delay: index * 0.1 }}
+            initial={{ opacity: 0, scale: 0.95, y: 15 }}
+            animate={{ opacity: 1, scale: 1, y: 0 }}
+            transition={{ 
+              delay: index * 0.1, 
+              duration: 0.6, 
+              ease: [0.22, 1, 0.36, 1] 
+            }}
           >
             <Link href={item.title === 'Saldo Total' ? '/accounts' : '/transactions'}>
-              <Card className="card-layer overflow-hidden border-none transition-all cursor-pointer group hover:bg-surface-2/30">
+              <Card className="card-layer group cursor-pointer relative overflow-hidden active:scale-[0.98] transition-transform">
+                {/* Decorative background element */}
+                <div className="absolute -right-4 -top-4 w-20 h-20 bg-growth/5 blur-2xl group-hover:bg-growth/10 transition-colors rounded-full" />
+                
                 <CardHeader className="flex flex-row items-center justify-between pb-3">
-                  <CardTitle className="text-[10px] uppercase tracking-[0.2em] font-bold text-ink-muted group-hover:text-ink-primary transition-colors">
+                  <span className="text-[10px] uppercase tracking-[0.25em] font-bold text-ink-muted group-hover:text-ink-primary transition-colors">
                     {item.title}
-                  </CardTitle>
+                  </span>
                   <div className={cn(
-                    "h-8 w-8 rounded-xl flex items-center justify-center transition-transform group-hover:scale-110 shadow-inner",
+                    "h-9 w-9 rounded-xl flex items-center justify-center transition-all group-hover:scale-110 shadow-lg",
                     item.title === 'Saldo Total' ? "bg-surface-3 text-ink-primary" : 
-                    item.title === 'Ingresos Mensuales' ? "bg-growth/10 text-growth" : "bg-expense/10 text-expense"
+                    item.title === 'Ingresos Mensuales' ? "bg-growth text-white" : "bg-expense text-white"
                   )}>
                     <item.icon className="h-4 w-4" />
                   </div>
                 </CardHeader>
                 <CardContent>
-                  <div className="text-4xl font-display font-medium text-ink-primary tracking-tight">{item.amount}</div>
-                  <div className="mt-3 flex items-center gap-2">
+                  <div className="text-4xl font-display font-medium text-ink-primary tracking-tight group-hover:translate-x-1 transition-transform inline-block">
+                    {item.amount}
+                  </div>
+                  <div className="mt-3 flex items-center gap-3">
                     <div className={cn(
-                      "flex items-center gap-1 rounded-full px-2 py-0.5 text-[10px] font-bold",
-                      item.trend === 'up' ? "bg-growth/10 text-growth" : "bg-expense/10 text-expense"
+                      "flex items-center gap-1 rounded-full px-2.5 py-0.5 text-[10px] font-bold shadow-sm",
+                      item.trend === 'up' ? "bg-growth/15 text-growth" : "bg-expense/15 text-expense"
                     )}>
                       {item.trend === 'up' ? (
                         <TrendingUp className="h-3 w-3" />
@@ -160,7 +169,7 @@ export default function DashboardPage() {
                       )}
                       <span>{item.change}</span>
                     </div>
-                    <span className="text-[10px] uppercase font-bold tracking-widest text-ink-faint">
+                    <span className="text-[10px] uppercase font-bold tracking-[0.15em] text-ink-faint">
                       vs prev
                     </span>
                   </div>
@@ -174,15 +183,19 @@ export default function DashboardPage() {
       <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-7">
         <motion.div
           className="col-span-4"
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.4 }}
+          transition={{ delay: 0.4, duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
         >
-          <Card className="card-layer border-none h-full overflow-hidden">
-            <CardHeader className="border-b border-border-subtle bg-surface-2/30">
-              <CardTitle className="text-sm uppercase tracking-[0.2em] font-bold text-ink-muted leading-none">Evolución Financiera</CardTitle>
+          <Card className="card-layer h-full border-none">
+            <CardHeader className="flex flex-row items-center justify-between pt-6 px-6">
+              <CardTitle className="text-xs uppercase tracking-[0.25em] font-bold text-ink-muted leading-none">Evolución Financiera</CardTitle>
+              <div className="flex items-center gap-4 text-[10px] uppercase font-bold tracking-widest">
+                <div className="flex items-center gap-1.5"><span className="w-2 h-2 rounded-full bg-growth" /> Ingresos</div>
+                <div className="flex items-center gap-1.5"><span className="w-2 h-2 rounded-full bg-expense" /> Gastos</div>
+              </div>
             </CardHeader>
-            <CardContent className="pt-6">
+            <CardContent className="p-6">
               <FinancialAreaChart data={last6Months} />
             </CardContent>
           </Card>
@@ -190,15 +203,15 @@ export default function DashboardPage() {
 
         <motion.div
           className="col-span-3"
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.5 }}
+          transition={{ delay: 0.5, duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
         >
-          <Card className="card-layer border-none h-full overflow-hidden">
-            <CardHeader className="border-b border-border-subtle bg-surface-2/30">
-              <CardTitle className="text-sm uppercase tracking-[0.2em] font-bold text-ink-muted">Gastos por Categoría</CardTitle>
+          <Card className="card-layer h-full border-none">
+            <CardHeader className="pt-6 px-6">
+              <CardTitle className="text-xs uppercase tracking-[0.25em] font-bold text-ink-muted">Gastos por Categoría</CardTitle>
             </CardHeader>
-            <CardContent className="pt-6">
+            <CardContent className="p-6">
               <CategoryPieChart data={pieData} />
             </CardContent>
           </Card>

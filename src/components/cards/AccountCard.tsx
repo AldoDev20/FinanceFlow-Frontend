@@ -18,21 +18,21 @@ export function AccountCard({ account }: { account: Account }) {
 
   return (
     <motion.div
-      initial={{ opacity: 0, scale: 0.95 }}
-      animate={{ opacity: 1, scale: 1 }}
-      whileHover={{ y: -4 }}
-      transition={{ duration: 0.2 }}
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      whileHover={{ y: -6, transition: { duration: 0.2, ease: 'easeOut' } }}
+      transition={{ duration: 0.4 }}
     >
-      <Card className="card-layer overflow-hidden border-none transition-all cursor-pointer group">
+      <Card className="glass-card group cursor-pointer active:scale-[0.98] transition-all duration-300">
       <CardContent className="p-6">
         <div className="flex items-start justify-between">
           <div className={cn(
             "flex h-12 w-12 items-center justify-center rounded-xl text-white shadow-lg",
             account.color || "bg-accent"
           )}>
-            <Icon size={24} />
+            <Icon size={22} className="group-hover:scale-110 transition-transform" />
           </div>
-          <button className="text-ink-muted opacity-0 group-hover:opacity-100 transition-opacity p-1 hover:bg-surface-2 rounded">
+          <button className="text-ink-muted hover:text-ink-primary opacity-0 group-hover:opacity-100 transition-all p-1.5 hover:bg-white/10 rounded-lg">
             <MoreVertical size={16} />
           </button>
         </div>
@@ -49,11 +49,19 @@ export function AccountCard({ account }: { account: Account }) {
           </div>
         </div>
         
-        <div className="mt-6 h-1 w-full bg-surface-3 rounded-full overflow-hidden">
-          <div 
-            className="h-full bg-growth transition-all duration-500" 
-            style={{ width: '100%' }} // Simple indicator
-          />
+        <div className="mt-8 space-y-2">
+          <div className="flex justify-between items-center text-[10px] uppercase font-bold tracking-widest text-ink-faint">
+            <span>Uso de cuenta</span>
+            <span>100%</span>
+          </div>
+          <div className="h-1.5 w-full bg-surface-3/30 rounded-full overflow-hidden backdrop-blur-sm">
+            <motion.div 
+              initial={{ width: 0 }}
+              animate={{ width: '100%' }}
+              transition={{ duration: 1, delay: 0.5, ease: 'circOut' }}
+              className="h-full bg-gradient-to-r from-growth to-growth/60 shadow-[0_0_8px_rgba(58,138,112,0.4)]" 
+            />
+          </div>
         </div>
       </CardContent>
     </Card>

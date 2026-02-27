@@ -44,7 +44,7 @@ export function Header({ onMenuClick }: { onMenuClick: () => void }) {
   }
 
   return (
-    <header className="fixed top-0 right-0 left-0 z-30 flex h-16 items-center border-b border-border-subtle bg-canvas/80 backdrop-blur-md px-4 lg:left-[84px] lg:px-8">
+    <header className="fixed top-0 right-0 left-0 z-30 flex h-16 items-center border-b border-white/5 bg-canvas/60 backdrop-blur-xl px-4 lg:left-[84px] lg:px-8 transition-all">
       <div className="flex w-full items-center justify-between">
         <div className="flex items-center gap-4">
           <Button 
@@ -58,7 +58,7 @@ export function Header({ onMenuClick }: { onMenuClick: () => void }) {
           
           <form 
             onSubmit={handleSearch}
-            className="hidden items-center gap-2 rounded-2xl bg-surface-2/50 px-4 py-2 text-xs text-ink-muted lg:flex border border-border-subtle focus-within:bg-surface-2 focus-within:border-border-strong transition-all overflow-hidden shadow-inner"
+            className="hidden items-center gap-2 rounded-xl bg-surface-2/30 px-4 py-2 text-xs text-ink-muted lg:flex border border-border-subtle focus-within:bg-surface-2/50 focus-within:border-growth/30 focus-within:ring-4 focus-within:ring-growth/5 transition-all overflow-hidden shadow-inner backdrop-blur-sm"
           >
             <Search className="h-3.5 w-3.5 shrink-0" />
             <input
@@ -69,7 +69,7 @@ export function Header({ onMenuClick }: { onMenuClick: () => void }) {
               onChange={(e) => setSearchQuery(e.target.value)}
               className="bg-transparent border-none outline-none w-44 focus:w-64 transition-all text-ink-primary placeholder:text-ink-faint font-medium"
             />
-            <kbd className="hidden md:inline-flex items-center gap-1 rounded-md border border-border-strong bg-surface-3 px-2 font-display font-medium text-ink-muted text-[10px] h-6 shadow-sm">
+            <kbd className="hidden md:inline-flex items-center gap-1 rounded-lg border border-border-subtle bg-surface-1/50 px-2 font-display font-medium text-ink-muted text-[10px] h-6 shadow-sm">
               <span className="text-[12px] leading-none">⌘</span>K
             </kbd>
           </form>

@@ -9,17 +9,17 @@ const buttonVariants = cva(
   {
     variants: {
       variant: {
-        default: "bg-ink-primary text-canvas hover:bg-ink-primary/90 shadow-sm",
+        default: "bg-ink-primary text-canvas hover:bg-ink-primary/90 shadow-lg shadow-ink-primary/10",
         destructive:
-          "bg-expense text-white hover:bg-expense/90 shadow-sm",
+          "bg-expense text-white hover:bg-expense/90 shadow-lg shadow-expense/10",
         outline:
-          "border border-border-strong bg-canvas shadow-sm hover:bg-surface-2 hover:text-ink-primary",
+          "border border-border-strong bg-white/5 backdrop-blur-md shadow-sm hover:bg-surface-2 hover:text-ink-primary hover:border-growth/30",
         secondary:
           "bg-surface-3 text-ink-primary hover:bg-surface-3/80 shadow-sm",
         ghost:
-          "text-ink-secondary hover:bg-surface-2 hover:text-ink-primary",
+          "text-ink-secondary hover:bg-surface-2/50 hover:text-ink-primary hover:backdrop-blur-sm",
         link: "text-ink-primary underline-offset-4 hover:underline",
-        growth: "bg-growth text-white hover:bg-growth/90 shadow-sm shadow-growth/10",
+        growth: "bg-gradient-to-br from-growth to-[#2d7a60] text-white hover:shadow-xl hover:shadow-growth/20 shadow-lg shadow-growth/10 transition-all",
       },
       size: {
         default: "h-10 px-5 py-2 has-[>svg]:px-4",

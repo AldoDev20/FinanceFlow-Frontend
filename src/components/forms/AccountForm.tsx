@@ -64,30 +64,30 @@ export function AccountForm() {
           control={form.control}
           name="name"
           render={({ field }) => (
-            <FormItem>
-              <FormLabel className="text-ink-secondary">Nombre de la cuenta</FormLabel>
+            <FormItem className="space-y-2">
+              <FormLabel className="text-sm font-semibold tracking-wide text-ink-secondary">Nombre de la cuenta</FormLabel>
               <FormControl>
-                <Input placeholder="Ej: Nómina Banamex" {...field} className="bg-surface-2 border-border-subtle rounded-lg" />
+                <Input placeholder="Ej: Nómina Banamex" {...field} />
               </FormControl>
               <FormMessage />
             </FormItem>
           )}
         />
 
-        <div className="grid grid-cols-2 gap-4">
+        <div className="grid grid-cols-2 gap-6">
           <FormField
             control={form.control}
             name="type"
             render={({ field }) => (
-              <FormItem>
-                <FormLabel className="text-ink-secondary">Tipo</FormLabel>
+              <FormItem className="space-y-2">
+                <FormLabel className="text-sm font-semibold tracking-wide text-ink-secondary">Tipo</FormLabel>
                 <Select onValueChange={field.onChange} defaultValue={field.value}>
                   <FormControl>
-                    <SelectTrigger className="bg-surface-2 border-border-subtle rounded-lg">
+                    <SelectTrigger className="h-11 rounded-xl bg-surface-2/40 backdrop-blur-sm border-border-subtle focus:ring-4 focus:ring-growth/10 focus:border-growth transition-all">
                       <SelectValue placeholder="Selecciona un tipo" />
                     </SelectTrigger>
                   </FormControl>
-                  <SelectContent className="bg-surface-1 border-border-strong">
+                  <SelectContent className="glass-card border-border-strong min-w-[160px]">
                     <SelectItem value="bank">Banco</SelectItem>
                     <SelectItem value="cash">Efectivo</SelectItem>
                     <SelectItem value="creditCard">Tarjeta de Crédito</SelectItem>
@@ -103,10 +103,10 @@ export function AccountForm() {
             control={form.control}
             name="currency"
             render={({ field }) => (
-              <FormItem>
-                <FormLabel className="text-ink-secondary">Moneda</FormLabel>
+              <FormItem className="space-y-2">
+                <FormLabel className="text-sm font-semibold tracking-wide text-ink-secondary">Moneda</FormLabel>
                 <FormControl>
-                  <Input placeholder="MXN" {...field} className="bg-surface-2 border-border-subtle rounded-lg" />
+                  <Input placeholder="MXN" {...field} />
                 </FormControl>
                 <FormMessage />
               </FormItem>
@@ -118,8 +118,8 @@ export function AccountForm() {
           control={form.control}
           name="initialBalance"
           render={({ field }) => (
-            <FormItem>
-              <FormLabel className="text-ink-secondary">Saldo Inicial</FormLabel>
+            <FormItem className="space-y-2">
+              <FormLabel className="text-sm font-semibold tracking-wide text-ink-secondary">Saldo Inicial</FormLabel>
               <FormControl>
                 <Input 
                   type="number" 
@@ -130,7 +130,6 @@ export function AccountForm() {
                     const val = e.target.value;
                     field.onChange(val === "" ? 0 : parseFloat(val));
                   }}
-                  className="bg-surface-2 border-border-subtle rounded-lg" 
                 />
               </FormControl>
               <FormMessage />
@@ -138,18 +137,19 @@ export function AccountForm() {
           )}
         />
 
-        <div className="flex gap-4 pt-4">
+        <div className="flex gap-4 pt-6">
           <Button 
             type="button" 
             variant="ghost" 
-            className="flex-1 text-ink-secondary rounded-lg"
+            className="flex-1"
             onClick={() => router.back()}
           >
             Cancelar
           </Button>
           <Button 
             type="submit" 
-            className="flex-1 bg-growth hover:bg-growth/90 text-white rounded-lg shadow-md shadow-growth/10"
+            variant="growth"
+            className="flex-1"
             disabled={isPending}
           >
             {isPending ? <Loader2 className="mr-2 h-4 w-4 animate-spin" /> : 'Guardar Cuenta'}

@@ -21,7 +21,7 @@ export default function NewAccountPage() {
         <p className="text-ink-secondary">Configura una nueva fuente de ingresos o gastos.</p>
       </div>
 
-      <Card className="card-layer border-none shadow-xl">
+      <Card className="glass-card shadow-2xl border-none">
         <CardHeader>
           <CardTitle className="text-lg font-semibold text-ink-primary">Detalles de la Cuenta</CardTitle>
           <CardDescription className="text-ink-muted">
