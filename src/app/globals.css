@@ -5,8 +5,8 @@
 @custom-variant dark (&:is(.dark *));
 
 @theme inline {
-  --font-sans: var(--font-body);
-  --font-display: var(--font-display);
+  --font-sans: var(--font-sans);
+  --font-display: var(--font-sans);
   --font-mono: var(--font-mono);
 
   /* --- Design Tokens: Surfaces --- */
@@ -165,7 +165,7 @@ body {
   font-family: var(--font-sans), system-ui, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  letter-spacing: -0.01em;
+  letter-spacing: -0.02em;
 }
 
 [class*='font-display'] {

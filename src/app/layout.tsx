@@ -1,26 +1,18 @@
 import type { Metadata, Viewport } from 'next'
-import { Quantico, Bellefair, IBM_Plex_Mono } from 'next/font/google'
+import { Geist, Geist_Mono } from 'next/font/google'
 import './globals.css'
 import { QueryProvider } from '@/providers/QueryProvider'
 import { Toaster } from 'sonner'
 import { GoogleOAuthProvider } from '@react-oauth/google'
 
-const quantico = Quantico({
-  variable: '--font-display',
+const geistSans = Geist({
+  variable: '--font-sans',
   subsets: ['latin'],
-  weight: ['400', '700'],
 })
 
-const bellefair = Bellefair({
-  variable: '--font-body',
-  subsets: ['latin'],
-  weight: ['400'],
-})
-
-const ibmPlexMono = IBM_Plex_Mono({
+const geistMono = Geist_Mono({
   variable: '--font-mono',
   subsets: ['latin'],
-  weight: ['400', '500', '600'],
 })
 
 export const metadata: Metadata = {
@@ -48,7 +40,7 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body
-        className={`${quantico.variable} ${bellefair.variable} ${ibmPlexMono.variable} font-body antialiased selection:bg-growth/20`}
+        className={`${geistSans.variable} ${geistMono.variable} font-sans antialiased selection:bg-growth/20`}
       >
         <div className="pointer-events-none fixed inset-0 z-50 opacity-[0.03] mix-blend-overlay noise-bg" aria-hidden="true" />
         <GoogleOAuthProvider clientId={googleClientId}>
